@@ -5,6 +5,7 @@
 25.09.2023  
 
 7.1: routed anecdotes, step1  
+7.2: routed anecdotes, step2  
 
 
 
