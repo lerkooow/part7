@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
   BrowserRouter as Router,
-  Routes, Route, Link, useParams, useMatch
+  Routes, Route, Link, useMatch, useNavigate
 } from 'react-router-dom'
 
 const padding = {
@@ -44,6 +44,8 @@ const Footer = () => (
 )
 
 const CreateNew = (props) => {
+  const navigate = useNavigate()
+
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
@@ -57,6 +59,7 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+    navigate('/')
   }
 
   return (
@@ -82,7 +85,8 @@ const CreateNew = (props) => {
 
 }
 
-const Anecdote = ({ anecdote }) => {
+const Anecdote = ({anecdote}) => {
+  console.log("🚀 ~ file: App.jsx:89 ~ Anecdote ~ anecdote:", anecdote)
   return (
     <div>
       <h2>{anecdote.content}</h2>
@@ -115,6 +119,10 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
+    setNotification(`a new anecdote ${anecdote.content} created!`);
+    setTimeout(() => {
+      setNotification("")
+    }, 5000);
   }
 
   const anecdoteById = (id) =>
@@ -132,7 +140,7 @@ const App = () => {
   }
 
   const match = useMatch('/anecdotes/:id')
-  const anecdote = match 
+  const anecdote = match
     ? anecdotes.find(anecdote => anecdote.id === Number(match.params.id))
     : null
 
@@ -144,6 +152,8 @@ const App = () => {
         <Link style={padding} to="/create">create new</Link>
         <Link style={padding} to="/about">about</Link>
       </div>
+
+      {notification && <p>{notification}</p>}
 
       <Routes>
         <Route path="/anecdotes/:id" element={<Anecdote anecdote={anecdote} />} />
