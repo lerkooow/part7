@@ -45,52 +45,53 @@ const Footer = () => (
 )
 
 const CreateNew = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const content = useField('text')
-  const author = useField('text')
-  const info = useField('text')
+  const [content, resetContent] = useField('text');
+  const [author, resetAuthor] = useField('text');
+  const [info, resetInfo] = useField('text');
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    props.addNew({
-      content: content.value,
-      author : author.value,
-      info : info.value,
-      votes: 0
-    })
-    navigate('/')
-  }
+      e.preventDefault();
+      props.addNew({
+          content: content.value,
+          author: author.value,
+          info: info.value,
+          votes: 0,
+      });
+      navigate('/');
+  };
 
   const handleReset = () => {
-    content.reset()
-    author.reset()
-    info.reset()
-  }
+      resetContent();
+      resetAuthor();
+      resetInfo();
+  };
 
   return (
-    <div>
-      <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          content
-          <input  {...content} /> 
-        </div>
-        <div>
-          author
-          <input  {...author} /> 
-        </div>
-        <div>
-          url for more info
-          <input  {...info} /> 
-        </div>
-        <button>create</button>
-        <button type="button" onClick={handleReset}>reset</button>
-      </form>
-    </div>
-  )
-
-}
+      <div>
+          <h2>create a new anecdote</h2>
+          <form onSubmit={handleSubmit}>
+              <div>
+                  content
+                  <input {...content} />
+              </div>
+              <div>
+                  author
+                  <input {...author} />
+              </div>
+              <div>
+                  url for more info
+                  <input {...info} />
+              </div>
+              <button>create</button>
+              <button type="button" onClick={handleReset}>
+                  reset
+              </button>
+          </form>
+      </div>
+  );
+};
 
 const Anecdote = ({anecdote}) => {
   return (
