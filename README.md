@@ -14,6 +14,7 @@
 26.09.2023  
 
 7.4: anecdotes and hooks step1  
+7.5: anecdotes and hooks step2  
 
 
 
