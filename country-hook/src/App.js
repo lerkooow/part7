@@ -25,7 +25,6 @@ const useCountry = (name) => {
         .then(response => {
           if (response.data.length > 0) {
             setCountry({ found: true, data: response.data })
-            console.log("🚀 ~ file: App.js:28 ~ useEffect ~ response.data:", response.data)
           } else {
             setCountry({ found: false, data: null })
           }
